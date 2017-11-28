@@ -12,32 +12,45 @@ class pokemonList extends Component{
     constructor(props){
         super(props);
         this.state={
-            visible: false,
-            currPokemon:''
+            visible: false
         };
         this.getDetail=this.getDetail.bind(this);
     }
     componentDidMount(){
         this.props.fetchPokemonList();
     }
-    //toggleVisibility = () => this.setState({ visible: !this.state.visible })
-    getDetail(pokemonName){
-        this.setState({
-            visible: true,
-            currPokemon: pokemonName
-        });
+    componentWillUpdate(nextProps, nextState){
+        if (nextState.visible) {
+            document.querySelector('.pusher').addEventListener('click', this.handleClick);
+        }
+        else {
+            document.querySelector('.pusher').removeEventListener('click', this.handleClick);
+        }
     }
+    //handle clicking for closing pokemon detail sidebar
+    handleClick = () =>{
+        if(this.state.visible){
+            this.setState({visible: false});
+        }
+    }
+    getDetail(){
+        this.setState({
+            visible: true
+        });
+        //console.log(this.props.pokemonDetails);
+    }
+
     render(){
         //console.log(this.props.pokemonList);
         return (<div>
             <Sidebar.Pushable as={Segment}>
-                <PokemonDetail visible={this.state.visible} pokemonName={this.state.currPokemon}/>
+                <PokemonDetail visible={this.state.visible} currPokemon={this.props.pokemonDetails}/>
                 <Sidebar.Pusher>
                     <Segment basic>
                         <Header as='h3'>Application Content</Header>
                         <Grid columns='4' container>
                             {this.props.pokemonList.map((pokemonInfo, i) => {
-                                return <PokemonItem getDetail={this.getDetail} key={i} pokemonInfo={pokemonInfo}/>
+                                return <PokemonItem getDetail={this.getDetail} key={i} pokemonInfo={pokemonInfo} />
                             })}
                         </Grid>
                     </Segment>
@@ -50,7 +63,10 @@ class pokemonList extends Component{
 }
 
 function mapStateToProps(state) {
-    return {pokemonList:state.pokemonList};
+    return {
+        pokemonList:state.pokemonList,
+        pokemonDetails:state.pokemonDetails
+    };
 }
 
 function mapDispatchToProps(dispatch) {

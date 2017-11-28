@@ -26,3 +26,12 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.detailItem{
+  text-align: left;
+  display: flex !important;
+  padding-left: 3em !important;
+}
+.abilitiesList{
+  margin-left: 1em !important;
+}

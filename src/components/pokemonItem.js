@@ -2,7 +2,7 @@ import React,{Component} from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {fetchPokemonList} from '../actions/index';
+import {fetchPokemonDetail} from '../actions/index';
 import { Grid, Image, Card } from 'semantic-ui-react';
 
 
@@ -11,17 +11,24 @@ class pokemonItem extends Component{
         super(props);
         this.handleGetDetail=this.handleGetDetail.bind(this);
     }
-    componentDidMount(){
-        //this.props.fetchPokemonList();
+
+    handleGetDetail(e){
+        this.props.fetchPokemonDetail(this.props.pokemonInfo.url);
+        /*this.props.getDetail();
+        console.log(this.props.pokemonInfo.name);*/
     }
-    handleGetDetail(){
-        this.props.getDetail(this.props.pokemonInfo.name);
+
+    componentWillReceiveProps(nextProps){
+        if(this.props.pokemonDetails !== nextProps.pokemonDetails){
+            this.props.getDetail();
+            //console.log(this.props.pokemonInfo.name);
+        }
     }
     render(){
         const {pokemonInfo}=this.props;
-        console.log(pokemonInfo);
+        //console.log(pokemonInfo);
         return (<Grid.Column>
-                <Card fluid color='green' onClick={this.handleGetDetail}>
+                <Card fluid color='purple' onClick={this.handleGetDetail}>
                     <Image src={pokemonInfo.imageUrl} />
                     <Card.Content>
                         <Card.Header>
@@ -32,16 +39,15 @@ class pokemonItem extends Component{
         </Grid.Column>);
     }
 }
-/*
+
 function mapStateToProps(state) {
-    return {pokemonList:state.pokemonList};
+    return {pokemonDetails:state.pokemonDetails};
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({fetchPokemonList}, dispatch);
+    return bindActionCreators({fetchPokemonDetail}, dispatch);
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(pokemonList);*/
-export default pokemonItem;
+export default connect(mapStateToProps,mapDispatchToProps)(pokemonItem);
 
 

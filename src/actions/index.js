@@ -11,13 +11,14 @@ export function fetchPokemonList() {
     }
 }
 
-/*
-export function fetchPokemonImg(url) {
-    const request = axios.get(url);
-    return {
-        type: contstants.FETCH_POKEMON_IMG_LIST,
+export function fetchPokemonDetail(pokemonDetailUrl) {
+    const request = axios.get(pokemonDetailUrl);
+    //console.log("action fetch detail:");
+    //console.log(request);
+        return {
+        type: contstants.FETCH_POKEMON_DETAILS,
         payload: request
     }
 
 }
-*/
+
