@@ -35,3 +35,18 @@
 .abilitiesList{
   margin-left: 1em !important;
 }
+.cardBkColor{
+  background-color: #e4bcef !important;
+}
+
+.cardImg{
+  background: rgba(0,0,0,0) !important;
+}
+
+.ui.card>.content, .ui.cards>.card>.content {
+  border-top: 1px solid purple !important;
+}
+
+.cardHeaderColor{
+  color: purple !important;
+}

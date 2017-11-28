@@ -47,9 +47,9 @@ class pokemonList extends Component{
                 <PokemonDetail visible={this.state.visible} currPokemon={this.props.pokemonDetails}/>
                 <Sidebar.Pusher>
                     <Segment basic>
-                        <Header as='h3'>Application Content</Header>
+                        <Header as='h1' color="purple">Pokedex</Header>
                         <Grid columns='4' container>
-                            {this.props.pokemonList.map((pokemonInfo, i) => {
+                            {this.props.pokemonList.pokemonResultList.map((pokemonInfo, i) => {
                                 return <PokemonItem getDetail={this.getDetail} key={i} pokemonInfo={pokemonInfo} />
                             })}
                         </Grid>

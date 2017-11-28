@@ -28,10 +28,10 @@ class pokemonItem extends Component{
         const {pokemonInfo}=this.props;
         //console.log(pokemonInfo);
         return (<Grid.Column>
-                <Card fluid color='purple' onClick={this.handleGetDetail}>
-                    <Image src={pokemonInfo.imageUrl} />
+                <Card fluid color='purple' className="cardBkColor" onClick={this.handleGetDetail}>
+                    <Image className="small cardImg" centered src={pokemonInfo.imageUrl} />
                     <Card.Content>
-                        <Card.Header>
+                        <Card.Header className="cardHeaderColor">
                             {pokemonInfo.name}
                         </Card.Header>
                     </Card.Content>

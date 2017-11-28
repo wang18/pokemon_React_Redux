@@ -3,19 +3,34 @@ import axios from 'axios';
 
 const IMG_ROOT_URL='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/';
 
-export default function pokemonListReducer(state=[], action) {
+const defaultList={
+    totalCount: 0,
+    pokemonResultList: [],
+    moreItem: true,
+    nextListUrl:''
+}
+
+export default function pokemonListReducer(state=defaultList, action) {
     switch (action.type){
         case constants.FETCH_POKEMON_LIST:
-            //console.log('pokemonlist reducer');
-            //console.log(action.payload);
-            const newState=[];
-            const apiData = action.payload.data.results;
-            apiData.map((eachData, i) => newState.push({
+            const {count, next, results} = action.payload.data;
+            const newPokemonResultList=[];
+            //const apiData = results;
+            console.log("list reducer");
+            console.log(action.payload);
+            results.map((eachData, i) => newPokemonResultList.push({
                 name: eachData.name,
                 url: eachData.url,
                 imageUrl: `${IMG_ROOT_URL}${i+1}.png`
             }));
-            return newState;
+            const newResultList=[...state.pokemonResultList, ...newPokemonResultList];
+            const newPokemonList={
+                totalCount: count,
+                pokemonResultList: newResultList,
+                moreItem:  newResultList.length < count,
+                nextListUrl: next
+            }
+            return newPokemonList;
         default:
             return state;
     }

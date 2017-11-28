@@ -10,16 +10,17 @@ class PokemonDetail extends Component {
         if(!currAbilities){
             return '';
         }
-         return(<Menu inverted vertical size='tiny' className='abilitiesList'>      {currAbilities.map((ca,i) => {
-                    return (<Menu.Item key={i} name={ca.ability.name} />
-                            )
-         })}</Menu>)
+         return currAbilities.map((ca,i) => {
+             return (<Label key={i}>{ca.ability.name} </Label>)
+         });
+         /*return currAbilities.map((ca,i) => {
+             return (<Label key={i}>{ca.ability.name}</Label>)
+         })*/
 
     }
     render() {
         const {currPokemon} =this.props;
-
-        console.log(currPokemon.abilities);
+        //console.log(currPokemon.abilities);
         return (
                 <Sidebar
                     as={Menu}
@@ -31,7 +32,7 @@ class PokemonDetail extends Component {
                     inverted
                 >
                     <Menu.Item name='details'>
-                        <Item.Header as='a'>Pokemon Details</Item.Header>
+                        <Item.Header className="medium" as='a'>Pokemon Details</Item.Header>
                     </Menu.Item>
                     <Menu.Item name='name' className='detailItem'>
                         <Item.Meta>Name: </Item.Meta> <Label>{currPokemon.name}</Label>
