@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../App.css';
 
-import PokemonList from './PokemonList';
+import PokemonList from './pokemonList';
 
 class App extends Component {
   render() {

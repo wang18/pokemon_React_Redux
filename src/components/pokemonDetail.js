@@ -1,13 +1,15 @@
 import React, { Component } from 'react'
 import { Sidebar, Menu, Item, Label } from 'semantic-ui-react'
 
+const DEFAULTIMG_PATH='https://t00.deviantart.net/d-4_MEKW_PtWWlaAkTCD4SJJFzY=/fit-in/150x150/filters:no_upscale():origin()/pre00/cdc4/th/pre/i/2015/088/e/0/poke_ball_icon__3f1__by_epe-d8nkpxf.png';
+
 class PokemonDetail extends Component {
     renderAbilities(currAbilities){
         if(!currAbilities){
             return '';
         }
          return currAbilities.map((ca,i) => {
-             return (<Label key={i}>{ca.ability.name} </Label>)
+             return (<Label key={i}>{ca.ability.name}</Label>)
          });
     }
 
@@ -31,7 +33,7 @@ class PokemonDetail extends Component {
                     </Menu.Item>
                     <Menu.Item name='image' className='detailItem'>
                      <Item.Meta>Image: </Item.Meta>
-                        <Label><Item.Image  className='detailsimg' src={currPokemon.imageUrl} /></Label>
+                        <Label><Item.Image  className='detailsimg' src={currPokemon.imageUrl ? currPokemon.imageUrl : DEFAULTIMG_PATH} /></Label>
                     </Menu.Item>
                     <Menu.Item name='weight' className='detailItem'>
                         <Item.Meta>Weight: </Item.Meta> <Label>{currPokemon.weight}</Label>

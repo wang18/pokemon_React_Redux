@@ -4,7 +4,6 @@ import {bindActionCreators} from 'redux';
 import {fetchPokemonDetail} from '../actions/index';
 import { Grid, Image, Card } from 'semantic-ui-react';
 
-
 class pokemonItem extends Component{
     constructor(props){
         super(props);

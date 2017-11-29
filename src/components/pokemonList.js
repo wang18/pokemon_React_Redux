@@ -51,7 +51,7 @@ class pokemonList extends Component{
                         <InfiniteScroll
                             pageStart={0}
                             loadMore={this.loadingItem}
-                            loader={<Grid container><Grid.Row><Loader active inline='centered' /></Grid.Row></Grid>}
+                            loader={<Grid container><Grid.Row><Loader inline='centered' /></Grid.Row></Grid>}
                             hasMore={this.props.pokemonList.moreItem}
                             useWindow={true}>
                             <Grid columns='4' container>

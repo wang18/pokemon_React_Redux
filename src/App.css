@@ -41,8 +41,12 @@
 
 .cardImg{
   background: rgba(0,0,0,0) !important;
+  height: 150px;
 }
 
+.detailsimg img{
+  height: 96px;
+}
 .ui.card>.content, .ui.cards>.card>.content {
   border-top: 1px solid purple !important;
 }
