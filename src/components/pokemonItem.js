@@ -1,5 +1,4 @@
 import React,{Component} from 'react';
-import InfiniteScroll from 'react-infinite-scroller';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {fetchPokemonDetail} from '../actions/index';
@@ -14,19 +13,15 @@ class pokemonItem extends Component{
 
     handleGetDetail(e){
         this.props.fetchPokemonDetail(this.props.pokemonInfo.url);
-        /*this.props.getDetail();
-        console.log(this.props.pokemonInfo.name);*/
     }
 
     componentWillReceiveProps(nextProps){
         if(this.props.pokemonDetails !== nextProps.pokemonDetails){
             this.props.getDetail();
-            //console.log(this.props.pokemonInfo.name);
         }
     }
     render(){
         const {pokemonInfo}=this.props;
-        //console.log(pokemonInfo);
         return (<Grid.Column>
                 <Card fluid color='purple' className="cardBkColor" onClick={this.handleGetDetail}>
                     <Image className="small cardImg" centered src={pokemonInfo.imageUrl} />

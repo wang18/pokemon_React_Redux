@@ -3,8 +3,7 @@ import InfiniteScroll from 'react-infinite-scroller';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {fetchPokemonList} from '../actions/index';
-import { Grid, Button, Sidebar, Segment, Header } from 'semantic-ui-react';
-
+import { Grid, Sidebar, Segment, Header, Loader } from 'semantic-ui-react';
 import PokemonItem from './pokemonItem';
 import PokemonDetail from "./pokemonDetail";
 
@@ -16,9 +15,7 @@ class pokemonList extends Component{
         };
         this.getDetail=this.getDetail.bind(this);
     }
-    componentDidMount(){
-        this.props.fetchPokemonList();
-    }
+
     componentWillUpdate(nextProps, nextState){
         if (nextState.visible) {
             document.querySelector('.pusher').addEventListener('click', this.handleClick);
@@ -33,30 +30,40 @@ class pokemonList extends Component{
             this.setState({visible: false});
         }
     }
+
     getDetail(){
         this.setState({
             visible: true
         });
-        //console.log(this.props.pokemonDetails);
+    }
+
+    loadingItem = () =>{
+        this.props.fetchPokemonList(this.props.pokemonList.offset);
     }
 
     render(){
-        //console.log(this.props.pokemonList);
         return (<div>
-            <Sidebar.Pushable as={Segment}>
-                <PokemonDetail visible={this.state.visible} currPokemon={this.props.pokemonDetails}/>
+            <Sidebar.Pusher as={Segment}>
+                    <PokemonDetail visible={this.state.visible} currPokemon={this.props.pokemonDetails}/>
                 <Sidebar.Pusher>
                     <Segment basic>
-                        <Header as='h1' color="purple">Pokedex</Header>
-                        <Grid columns='4' container>
-                            {this.props.pokemonList.pokemonResultList.map((pokemonInfo, i) => {
-                                return <PokemonItem getDetail={this.getDetail} key={i} pokemonInfo={pokemonInfo} />
-                            })}
-                        </Grid>
+                        <Header as='h1'className='pageHeader'>Pokedex</Header>
+                        <InfiniteScroll
+                            pageStart={0}
+                            loadMore={this.loadingItem}
+                            loader={<Grid container><Grid.Row><Loader active inline='centered' /></Grid.Row></Grid>}
+                            hasMore={this.props.pokemonList.moreItem}
+                            useWindow={true}>
+                            <Grid columns='4' container>
+                                {this.props.pokemonList.pokemonResultList.map((pokemonInfo, i) => {
+                                    return <PokemonItem getDetail={this.getDetail} key={i} pokemonInfo={pokemonInfo} />
+                                })}
+                            </Grid>
+                        </InfiniteScroll>
                     </Segment>
                 </Sidebar.Pusher>
 
-            </Sidebar.Pushable>
+            </Sidebar.Pusher>
 
         </div>);
     }

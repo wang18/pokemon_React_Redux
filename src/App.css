@@ -50,3 +50,19 @@
 .cardHeaderColor{
   color: purple !important;
 }
+
+.ui.inverted.menu .item, .ui.inverted.menu .item>a:not(.ui) {
+  color: #e4bcef !important;
+}
+
+.ui.vertical.menu .item>.label {
+  background: #e4bcef !important;
+  color: purple !important;
+}
+
+.pageHeader{
+  padding: 15px 20px !important;
+  border-radius: 5px !important;
+  background-color: #e4bcef !important;
+  color: purple !important;
+}

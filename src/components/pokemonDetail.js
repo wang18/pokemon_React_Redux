@@ -1,11 +1,7 @@
 import React, { Component } from 'react'
-import { Sidebar, Segment, Menu, Image, Icon, Header,Item, Label,Table } from 'semantic-ui-react'
+import { Sidebar, Menu, Item, Label } from 'semantic-ui-react'
 
 class PokemonDetail extends Component {
-    //state = { visible: false }
-    constructor(props){
-        super(props);
-    }
     renderAbilities(currAbilities){
         if(!currAbilities){
             return '';
@@ -13,14 +9,10 @@ class PokemonDetail extends Component {
          return currAbilities.map((ca,i) => {
              return (<Label key={i}>{ca.ability.name} </Label>)
          });
-         /*return currAbilities.map((ca,i) => {
-             return (<Label key={i}>{ca.ability.name}</Label>)
-         })*/
-
     }
+
     render() {
         const {currPokemon} =this.props;
-        //console.log(currPokemon.abilities);
         return (
                 <Sidebar
                     as={Menu}
@@ -32,7 +24,7 @@ class PokemonDetail extends Component {
                     inverted
                 >
                     <Menu.Item name='details'>
-                        <Item.Header className="medium" as='a'>Pokemon Details</Item.Header>
+                        <Item className="ui header" as='h1'>Pokemon Details</Item>
                     </Menu.Item>
                     <Menu.Item name='name' className='detailItem'>
                         <Item.Meta>Name: </Item.Meta> <Label>{currPokemon.name}</Label>
@@ -42,7 +34,6 @@ class PokemonDetail extends Component {
                         <Label><Item.Image  className='detailsimg' src={currPokemon.imageUrl} /></Label>
                     </Menu.Item>
                     <Menu.Item name='weight' className='detailItem'>
-
                         <Item.Meta>Weight: </Item.Meta> <Label>{currPokemon.weight}</Label>
                     </Menu.Item>
                     <Menu.Item name='camera' className='detailItem'>

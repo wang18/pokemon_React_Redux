@@ -17,8 +17,6 @@ export default function (state=defaultDetails, action) {
                 weight: action.payload.data.weight,
                 abilities: action.payload.data.abilities
             };
-            //console.log("details");
-            //console.log(newState);
             return newState;
         default:
             return state;
